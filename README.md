@@ -20,3 +20,15 @@
 
 ![](images/img_4.jpg)
 
+
+## Model-View-Controller (MVC)
+
+### Description
+
+*Create the front end for Just Tech News using Handlebars.js, a popular templating engine. The application’s codebase will also be structured to follow the Model-View-Controller (MVC) paradigm, to ensure a separation of concerns. Finally, to provide authentication, build on the password hashing from the application’s back end so that logged-in users can update and delete their posts through a special dashboard interface.*
+
+### Mock-Up
+
+![](images/demo-1.jpg)
+
+![](images/demo-2.jpg)
