@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Vote } = require('../../models');
+const { Post, User, Vote, Comment } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
@@ -78,6 +78,19 @@ router.post('/', withAuth, (req, res) => {
         });
 });
 
+// PUT /api/posts/upvote
+router.put('/upvote', (req, res) => {
+    // make sure the session exists first
+    if (req.session) {
+        // pass session id along with all destructured properties on req.body
+        Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
+            .then(updatedVoteData => res.json(updatedVoteData))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
+});
 
 // Update a Post's Title
 router.put('/:id', withAuth, (req, res) => {
@@ -103,21 +116,6 @@ router.put('/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-
-// PUT /api/posts/upvote
-router.put('/upvote', withAuth, (req, res) => {
-    // make sure the session exists first
-    if (req.session) {
-        // pass session id along with all destructured properties on req.body
-        Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
-            .then(updatedVoteData => res.json(updatedVoteData))
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
-    }
-});
-
 
 // Delete a Post
 router.delete('/:id', withAuth, (req, res) => {
