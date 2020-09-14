@@ -47,7 +47,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes:  [
+        attributes: [
             'id',
             'post_url',
             'title',
@@ -71,16 +71,22 @@ router.get('/edit/:id', withAuth, (req, res) => {
     })
         .then(dbPostData => {
             if (!dbPostData) {
-                res.status(404).json({ message: 'No post found with this id'});
+                res.status(404).json({ message: 'No post found with this id' });
                 return;
             }
-            // serialize data before passing to template
+
+            // serialize the data
             const post = dbPostData.get({ plain: true });
-            res.render('edit-post', { post, loggedIn: true });
+
+            res.render('edit-post', {
+                post,
+                loggedIn: true
+            });
         })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
+
 module.exports = router;
