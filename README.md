@@ -32,3 +32,13 @@
 ![](images/demo-1.jpg)
 
 ![](images/demo-2.jpg)
+
+### Instructions on how to run the app
+
+- Add a .env file to the root of the app with the following details
+
+```text
+DB_NAME='just_tech_news_db'
+DB_USER='root'
+DB_PW='xxx'
+```
